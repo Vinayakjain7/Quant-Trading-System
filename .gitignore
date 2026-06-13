@@ -29,6 +29,9 @@ signals_history.csv
 # Private live system — kept OUT of the public repo (your active edge)
 hedge fund system/
 
+# Internal helper note — not part of the public project
+PUSH_TO_GITHUB.md
+
 # Stray pytest temp dirs
 pytest-cache-files-*/
 .pytest_cache/
