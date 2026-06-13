@@ -3,7 +3,7 @@
 A configurable, **rigorously backtested** mean-reversion engine with an optional
 machine-learning ranking layer — built entirely on free [yfinance](https://github.com/ranaroussi/yfinance) data.
 
-[![CI](https://github.com/Vinayakjain7/quant-trading/actions/workflows/ci.yml/badge.svg)](https://github.com/Vinayakjain7/quant-trading/actions/workflows/ci.yml)
+[![CI](https://github.com/Vinayakjain7/Quant-Trading-System/actions/workflows/ci.yml/badge.svg)](https://github.com/Vinayakjain7/Quant-Trading-System/actions/workflows/ci.yml)
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green)
 ![Status](https://img.shields.io/badge/status-research-orange)
@@ -92,8 +92,8 @@ tests/              # pytest suite incl. an explicit no-look-ahead test
 
 ```bash
 # 1. clone & install
-git clone https://github.com/Vinayakjain7/quant-trading.git
-cd quant-trading
+git clone https://github.com/Vinayakjain7/Quant-Trading-System.git
+cd Quant-Trading-System
 python -m venv venv && source venv/bin/activate   # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 
