@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Virtual envs
+venv/
+.venv/
+env/
+
+# Data / cache / outputs (don't commit generated artifacts)
+data_cache/
+outputs/
+*.csv
+!sample_*.csv
+# keep README chart images, ignore generated result csvs in docs (covered by *.csv)
+!docs/*.png
+
+# Live runtime / PRIVATE trading state — never commit personal trading data
+capital.txt
+portfolio.json
+portfolio.csv
+trades.csv
+*.json
+signals_history.csv
+
+# Private live system — kept OUT of the public repo (your active edge)
+hedge fund system/
+
+# Stray pytest temp dirs
+pytest-cache-files-*/
+.pytest_cache/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

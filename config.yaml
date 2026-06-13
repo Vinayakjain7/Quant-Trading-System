@@ -1,0 +1,103 @@
+# ============================================================
+#  Quant Trading System — central configuration
+#  Everything tunable lives here. No magic numbers in the code.
+# ============================================================
+
+# --- Universe -------------------------------------------------
+# Universe-agnostic: drop in ANY list of yfinance tickers.
+# Examples: NSE -> "RELIANCE.NS", US -> "AAPL", crypto -> "BTC-USD"
+universe:
+  name: "nifty_core"
+  # Pruned (June 2026) 6 names that destroyed value standalone (Sharpe <= -0.25)
+  # or had broken data: WIPRO, HINDUNILVR, BRITANNIA, BAJAJ-AUTO, TATASTEEL, TATAMOTORS.
+  # NOTE: this is in-sample selection — re-evaluate periodically, don't treat as permanent.
+  tickers:
+    # Banking & Finance
+    - HDFCBANK.NS
+    - ICICIBANK.NS
+    - SBIN.NS
+    - KOTAKBANK.NS
+    - AXISBANK.NS
+    - BAJFINANCE.NS
+    - BAJAJFINSV.NS
+    # IT
+    - TCS.NS
+    - INFY.NS
+    - HCLTECH.NS
+    - TECHM.NS
+    # Energy
+    - RELIANCE.NS
+    - ONGC.NS
+    - BPCL.NS
+    - IOC.NS
+    # FMCG
+    - ITC.NS
+    - NESTLEIND.NS
+    - DABUR.NS
+    # Auto
+    - MARUTI.NS
+    - HEROMOTOCO.NS
+    - EICHERMOT.NS
+    # Pharma
+    - SUNPHARMA.NS
+    - DRREDDY.NS
+    - CIPLA.NS
+    - DIVISLAB.NS
+    # Infra & Capital Goods
+    - LT.NS
+    - ULTRACEMCO.NS
+    - GRASIM.NS
+    - ADANIPORTS.NS
+    # Metals
+    - HINDALCO.NS
+    - JSWSTEEL.NS
+    # Telecom & Others
+    - BHARTIARTL.NS
+    - POWERGRID.NS
+    - NTPC.NS
+
+# --- Data -----------------------------------------------------
+data:
+  start: "2018-01-01"
+  end: null            # null = today
+  cache_dir: "data_cache"
+  cache_days: 1        # refetch if cache older than this many days
+
+# --- Strategy (rule-based core) ------------------------------
+strategy:
+  bb_window: 20        # Bollinger lookback
+  bb_std: 1.5          # band width in std devs
+  trend_ma: 200        # long trend filter (robustness-tested: 200 > 100)
+  rsi_window: 14
+  rsi_max_entry: 35    # only buy deeper dips (robustness-tested: 35 > 45)
+  exit_target: mean    # "mean" = take profit at band midline; "upper" = let winners run
+  regime_filter: true  # only enter when the market (universe breadth index) is in an uptrend
+  regime_ma: 200       # MA length for the regime index
+  atr_window: 14
+  vol_window: 20       # volume MA window
+  min_vol_ratio: 0.8   # require volume >= 0.8x its average (liquidity)
+
+# --- Risk management -----------------------------------------
+risk:
+  capital: 100000          # base capital
+  risk_per_trade: 0.02     # fraction of capital risked per trade
+  atr_stop_mult: 2.0       # stop = entry - atr_stop_mult * ATR
+  max_allocation: 0.20     # max fraction of capital in one name
+  max_positions: 5         # max concurrent open positions
+  max_drawdown: -0.10      # halt new trades below this portfolio DD
+  top_n: 5                 # act on top-N ranked signals
+
+# --- Backtest assumptions (be realistic!) --------------------
+backtest:
+  commission_bps: 3        # 0.03% per side
+  slippage_bps: 5          # 0.05% per side
+  risk_free_rate: 0.06     # annual, for Sharpe (India ~6%)
+  walk_forward_splits: 4   # out-of-sample folds
+
+# --- ML ranking layer (optional) -----------------------------
+ml:
+  enabled: true
+  model: "gradient_boosting"   # gradient_boosting | random_forest | logistic
+  horizon_days: 5              # predict forward N-day return sign
+  min_train_rows: 500
+  test_size: 0.25             # time-ordered holdout
