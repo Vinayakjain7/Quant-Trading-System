@@ -56,6 +56,36 @@ universe:
     - POWERGRID.NS
     - NTPC.NS
 
+    # ===== MID & SMALL CAP (added for more signals) =====
+    # Higher volatility / thinner liquidity than the large-caps above.
+    # Test with `python run.py backtest`, then prune weak names via the
+    # per-name diagnostics. Consider raising backtest.slippage_bps for these.
+    # -- Mid-cap autos / industrials
+    - TVSMOTOR.NS
+    - ASHOKLEY.NS
+    - BHARATFORG.NS
+    - CUMMINSIND.NS
+    # -- Mid-cap IT
+    - MPHASIS.NS
+    - PERSISTENT.NS
+    # -- Mid-cap pharma
+    - AUROPHARMA.NS
+    - LUPIN.NS
+    # -- Mid-cap financials
+    - FEDERALBNK.NS
+    - IDFCFIRSTB.NS
+    - MFSL.NS
+    - ABCAPITAL.NS
+    # -- Consumer / realty / capital goods
+    - TATAPOWER.NS
+    - INDHOTEL.NS
+    - DIXON.NS
+    - VOLTAS.NS
+    # -- Mid-cap metals / PSU
+    - SAIL.NS
+    - NMDC.NS
+    - IRCTC.NS
+
 # --- Data -----------------------------------------------------
 data:
   start: "2018-01-01"
